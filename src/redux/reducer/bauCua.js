@@ -10,52 +10,27 @@ const initialState = {
     ga: 0,
     ca: 0,
   },
-  result: {
-    result1: "",
-    result2: "",
-    result3: "",
-  },
+  result: [],
 };
 
 export const bauCuaReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_RESULT: {
-      const newResult = { ...state.result };
+      console.log(action.payload);
+      const newResult = action.payload;
+      const newObj = {};
+      let income = 0;
       let newValue = state.value;
-      newResult.result1 = action.payload.result1;
-      newResult.result2 = action.payload.result2;
-      newResult.result3 = action.payload.result3;
-      console.log(newResult.result1);
-      console.log(newResult.result2);
-      console.log(newResult.result3);
-      if (
-        newResult.result1 === newResult.result2 &&
-        newResult.result2 === newResult.result3
-      ) {
-        newValue += state.selected[newResult.result1] * 2;
-        newResult.result1 = "";
-        newResult.result2 = "";
-      }
-      if (
-        newResult.result1 === newResult.result2 ||
-        newResult.result1 === newResult.result3
-      ) {
-        newValue += state.selected[newResult.result1];
-        newResult.result1 = "";
-      }
-      if (newResult.result2 === newResult.result3) {
-        newValue += state.selected[newResult.result2];
-        newResult.result2 = "";
-      }
-      if (state.selected[newResult.result1]) {
-        newValue += state.selected[newResult.result1] * 2;
-      }
-      if (state.selected[newResult.result2]) {
-        newValue += state.selected[newResult.result2] * 2;
-      }
-      if (state.selected[newResult.result3]) {
-        newValue += state.selected[newResult.result3] * 2;
-      }
+      newResult.forEach((item) => {
+        if (newObj[item]) {
+          newObj[item]++;
+        } else newObj[item] = 2;
+      });
+      const keys = Object.keys(newObj);
+      keys.forEach((key) => {
+        income += newObj[key] * state.selected[key];
+      });
+      newValue += income;
       return {
         value: newValue,
         result: newResult,

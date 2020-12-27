@@ -4,16 +4,28 @@ import data from "../data.json";
 import { SET_RESULT } from "../redux/constant/BauCua";
 
 export const Xoc = ({ setResult }) => {
-  const [select1, setselect1] = useState(Math.floor(Math.random() * 6));
-  const [select2, setselect2] = useState(Math.floor(Math.random() * 6));
-  const [select3, setselect3] = useState(Math.floor(Math.random() * 6));
+  const random = () => Math.floor(Math.random() * 6);
+  const [values, setValues] = useState([random(), random(), random()]);
   const [animation, setAnimation] = useState(false);
-  const [dispatchAction, setDispatchAction] = useState(false);
+  const [xocTime, setXocTime] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
   const actAnimation = (animation) => {
     return animation ? "xucXac" : "";
   };
 
-  useEffect(() => {}, [dispatchAction]);
+  useEffect(() => {
+    if (xocTime === 4) {
+      setResult(
+        data[values[0]].name,
+        data[values[1]].name,
+        data[values[2]].name
+      );
+      clearInterval(intervalId);
+      setIntervalId(null);
+      setAnimation(false);
+      setXocTime(0);
+    }
+  }, [intervalId, values, setResult, xocTime]);
   return (
     <div
       className='d-flex flex-column justify-content-center align-items-center'
@@ -21,21 +33,21 @@ export const Xoc = ({ setResult }) => {
     >
       <img
         className={"mb-3 " + actAnimation(animation)}
-        src={data[select1].url}
+        src={data[values[0]].url}
         alt='hinh bau'
         height={50}
         width={50}
       />
       <img
         className={"mb-3 " + actAnimation(animation)}
-        src={data[select2].url}
+        src={data[values[1]].url}
         alt='hinh bau'
         height={50}
         width={50}
       />
       <img
         className={"mb-3 " + actAnimation(animation)}
-        src={data[select3].url}
+        src={data[values[2]].url}
         alt='hinh bau'
         height={50}
         width={50}
@@ -45,19 +57,12 @@ export const Xoc = ({ setResult }) => {
         className='btn btn-success'
         style={{ fontSize: 20, height: 50, width: 100 }}
         onClick={() => {
-          let i = 0;
-          let random = setInterval(() => {
+          const intervalId = setInterval(() => {
+            setValues([random(), random(), random()]);
+            setXocTime((xocTime) => xocTime + 1);
             setAnimation(true);
-            setselect1(Math.floor(Math.random() * 6));
-            setselect2(Math.floor(Math.random() * 6));
-            setselect3(Math.floor(Math.random() * 6));
-            i++;
-            if (i === 4) {
-              clearInterval(random);
-              setDispatchAction(!dispatchAction);
-              setAnimation(false);
-            }
           }, 1000);
+          setIntervalId(intervalId);
         }}
       >
         Xốc
@@ -70,7 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
   setResult: (result1, result2, result3) => {
     dispatch({
       type: SET_RESULT,
-      payload: { result1: result1, result2: result2, result3: result3 },
+      payload: [result1, result2, result3],
     });
   },
 });
