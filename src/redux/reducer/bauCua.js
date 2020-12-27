@@ -25,13 +25,35 @@ export const bauCuaReducer = (state = initialState, action) => {
       newResult.result1 = action.payload.result1;
       newResult.result2 = action.payload.result2;
       newResult.result3 = action.payload.result3;
-      if (state.selected[newResult.result1] !== 0) {
+      console.log(newResult.result1);
+      console.log(newResult.result2);
+      console.log(newResult.result3);
+      if (
+        newResult.result1 === newResult.result2 &&
+        newResult.result2 === newResult.result3
+      ) {
+        newValue += state.selected[newResult.result1] * 2;
+        newResult.result1 = "";
+        newResult.result2 = "";
+      }
+      if (
+        newResult.result1 === newResult.result2 ||
+        newResult.result1 === newResult.result3
+      ) {
+        newValue += state.selected[newResult.result1];
+        newResult.result1 = "";
+      }
+      if (newResult.result2 === newResult.result3) {
+        newValue += state.selected[newResult.result2];
+        newResult.result2 = "";
+      }
+      if (state.selected[newResult.result1]) {
         newValue += state.selected[newResult.result1] * 2;
       }
-      if (state.selected[newResult.result2] !== 0) {
+      if (state.selected[newResult.result2]) {
         newValue += state.selected[newResult.result2] * 2;
       }
-      if (state.selected[newResult.result3] !== 0) {
+      if (state.selected[newResult.result3]) {
         newValue += state.selected[newResult.result3] * 2;
       }
       return {

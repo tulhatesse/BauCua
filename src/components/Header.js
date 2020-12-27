@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 const Header = ({ value }) => {
   return (
     <div className='container text-center d-flex flex-column align-items-center justify-content-center'>
-      <h1 className='text-danger' style={{ fontSize: "50px" }}>
+      <h1 className='text-danger' style={{ fontSize: "40px" }}>
         BÀI TẬP BẦU CUA CYBERSOFT
       </h1>
       <div

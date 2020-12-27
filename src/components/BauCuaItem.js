@@ -14,11 +14,11 @@ export const BauCuaItem = ({
   return (
     <div
       className='d-flex flex-column justify-content-center align-items-center'
-      style={{ width: 250, marginRight: 100 }}
+      style={{ width: 200, marginRight: 120 }}
     >
-      <img className='mb-3' src={url} alt='hinh bau' height={200} width={200} />
+      <img className='mb-3' src={url} alt='hinh bau' height={180} width={180} />
       <div
-        className='BauCuaItem__Cuoc d-flex align-items-center justify-content-center bg-warning rounded py-2 px-5 mb-3'
+        className='BauCuaItem__Cuoc d-flex align-items-center justify-content-center bg-warning rounded py-2 px-5 mb-2'
         style={{ width: 200, fontSize: "20px", fontWeight: 600 }}
       >
         <p className='m-0'>Cược: </p>

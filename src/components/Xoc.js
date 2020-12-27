@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import data from "../data.json";
 import { SET_RESULT } from "../redux/constant/BauCua";
@@ -8,12 +8,14 @@ export const Xoc = ({ setResult }) => {
   const [select2, setselect2] = useState(Math.floor(Math.random() * 6));
   const [select3, setselect3] = useState(Math.floor(Math.random() * 6));
   const [animation, setAnimation] = useState(false);
-
+  const [dispatchAction, setDispatchAction] = useState(false);
   const actAnimation = (animation) => {
     return animation ? "xucXac" : "";
   };
+
+  useEffect(() => {}, [dispatchAction]);
   return (
-    <v
+    <div
       className='d-flex flex-column justify-content-center align-items-center'
       style={{ paddingTop: "50%" }}
     >
@@ -52,11 +54,7 @@ export const Xoc = ({ setResult }) => {
             i++;
             if (i === 4) {
               clearInterval(random);
-              setResult(
-                data[select1].name,
-                data[select2].name,
-                data[select3].name
-              );
+              setDispatchAction(!dispatchAction);
               setAnimation(false);
             }
           }, 1000);
@@ -64,7 +62,7 @@ export const Xoc = ({ setResult }) => {
       >
         Xốc
       </button>
-    </v>
+    </div>
   );
 };
 

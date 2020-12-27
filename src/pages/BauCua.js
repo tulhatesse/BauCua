@@ -6,7 +6,7 @@ import data from "../data.json";
 
 export default function BauCua() {
   return (
-    <div className='bg-dark p-5'>
+    <div className='bg-dark px-3 py-3'>
       <Header />
       <div className='row'>
         <div className='BauCuaList d-flex justify-content-start flex-wrap col-9'>
