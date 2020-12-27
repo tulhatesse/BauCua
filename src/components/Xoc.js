@@ -13,7 +13,7 @@ export const Xoc = ({ setResult }) => {
     return animation ? "xucXac" : "";
   };
   return (
-    <div
+    <v
       className='d-flex flex-column justify-content-center align-items-center'
       style={{ paddingTop: "50%" }}
     >
@@ -64,7 +64,7 @@ export const Xoc = ({ setResult }) => {
       >
         Xốc
       </button>
-    </div>
+    </v>
   );
 };
 

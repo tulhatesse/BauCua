@@ -3,9 +3,18 @@ import { connect } from "react-redux";
 
 const Header = ({ value }) => {
   return (
-    <div className='container text-center'>
-      <h1 className='text-danger'>BÀI TẬP BẦU CUA CYBERSOFT</h1>
-      <p>Tiền thưởng: {value} điểm </p>
+    <div className='container text-center d-flex flex-column align-items-center justify-content-center'>
+      <h1 className='text-danger' style={{ fontSize: "50px" }}>
+        BÀI TẬP BẦU CUA CYBERSOFT
+      </h1>
+      <div
+        className='bg-warning rounded py-2 px-2 mb-3 d-flex align-items-center justify-content-center'
+        style={{ width: "250px" }}
+      >
+        <p className='text-dark m-0' style={{ fontSize: "20px" }}>
+          Tiền thưởng: {value} điểm{" "}
+        </p>
+      </div>
     </div>
   );
 };

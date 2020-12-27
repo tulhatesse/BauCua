@@ -1,8 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ADD_ITEM } from "../redux/constant/BauCua";
+import { ADD_ITEM, REMOVE_ITEM } from "../redux/constant/BauCua";
 
-export const BauCuaItem = ({ id, name, url, addItem, selected }) => {
+export const BauCuaItem = ({
+  id,
+  name,
+  url,
+  addItem,
+  removeItem,
+  selected,
+}) => {
   const itemMoney = selected[name];
   return (
     <div
@@ -11,8 +18,8 @@ export const BauCuaItem = ({ id, name, url, addItem, selected }) => {
     >
       <img className='mb-3' src={url} alt='hinh bau' height={200} width={200} />
       <div
-        className='BauCuaItem__Cuoc d-flex align-items-center justify-content-center bg-warning rounded py-2 px-5 mb-3  '
-        style={{ width: 200 }}
+        className='BauCuaItem__Cuoc d-flex align-items-center justify-content-center bg-warning rounded py-2 px-5 mb-3'
+        style={{ width: 200, fontSize: "20px", fontWeight: 600 }}
       >
         <p className='m-0'>Cược: </p>
         <button
@@ -30,6 +37,9 @@ export const BauCuaItem = ({ id, name, url, addItem, selected }) => {
           type='button'
           className='btn btn-success mx-2'
           style={{ fontSize: 20 }}
+          onClick={() => {
+            removeItem(name);
+          }}
         >
           -
         </button>
@@ -43,9 +53,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addItem: (item, value) => {
+  addItem: (item) => {
     dispatch({
       type: ADD_ITEM,
+      payload: item,
+    });
+  },
+  removeItem: (item) => {
+    dispatch({
+      type: REMOVE_ITEM,
       payload: item,
     });
   },

@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "Pony";
+  src: local("Iciel Pony"), url(./fonts/Pony.ttf) format("truetype");
+}
+
+*,
+body,
+p {
+  font-family: "Pony";
+}
+
 @keyframes animBauCua1608986988558 {
   0% {
     left: -50px;
